@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="53dp"
+            android:gravity="center"
+            android:text="Price:"
+            android:textSize="20dp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textColor="#000000"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="75dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Type:"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:layout_width="126dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:id="@+id/tvtype"
+            android:textColor="#000000"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Rating:"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="#000000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="Number of Ratings:"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:textColor="#000000"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:id="@+id/tvrating"
+                android:textColor="#000000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:id="@+id/tvNoOfRatings"
+                android:textColor="#000000"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <EditText
+            android:layout_width="299dp"
+            android:layout_height="match_parent"
+            android:hint="Enter a Rating for the Dish(1,2,3...10)"
+            android:id="@+id/etRating"
+            android:textColor="#000000"
+            android:inputType="number"
+            />
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="Rate"
+            android:textSize="15dp"
+            android:id="@+id/btnRating"
+            android:textColor="#000000"
+            android:background="@drawable/mybutton"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
