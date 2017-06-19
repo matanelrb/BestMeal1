@@ -28,7 +28,8 @@
             android:value="AIzaSyA26FCEz8XruLzdcCkC2aVHceu2vz5Ua40" />
 
         <activity android:name=".displayDishes" />
-        <activity android:name=".Search"></activity>
+        <activity android:name=".Search" />
+        <activity android:name=".Top10"></activity>
     </application>
 
 </manifest>

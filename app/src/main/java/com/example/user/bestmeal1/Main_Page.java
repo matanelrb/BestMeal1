@@ -42,7 +42,7 @@ public class Main_Page extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__page);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEDB64D")));
+
 
 
         DBHandler db = new DBHandler(this);
@@ -72,6 +72,9 @@ public class Main_Page extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        toolbar.setBackgroundColor(Color.parseColor("#FFEDB64D"));
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -130,11 +133,15 @@ public class Main_Page extends AppCompatActivity
 
         } else if (id == R.id.nav_top_ten_restaurants) {
 
-
+            Intent intent = new Intent(this,Top10.class);
+            intent.putExtra("TOP10","restaurants");
+            startActivity(intent);
 
         } else if (id == R.id.nav_top_ten_dishes) {
 
-
+            Intent intent = new Intent(this,Top10.class);
+            intent.putExtra("TOP10","dishes");
+            startActivity(intent);
 
         }
 

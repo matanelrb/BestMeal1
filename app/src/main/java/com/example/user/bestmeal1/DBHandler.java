@@ -316,7 +316,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return restaurants;
     }
 
-    public ArrayList<Dish> getDishByRestaurant(String rName){
+    public ArrayList<Dish> getDishesByRestaurant(String rName){
 
         ArrayList<Dish>dishes = new ArrayList<Dish>();
 
@@ -361,6 +361,57 @@ public class DBHandler extends SQLiteOpenHelper {
             db.update(TABLE_DISH, values, DISH_NAME + " =? AND restaurant_name =?", new String[]{dish.getDish_name(), dish.getRestaurant_name()});
 
     }
+
+    public ArrayList<Restaurant> findRestaurants(String searchString){
+
+        ArrayList<Restaurant>restaurants = new ArrayList<>();
+        SQLiteDatabase db =this.getReadableDatabase();
+        String query = "SELECT * FROM "+TABLE_RESTAURANT+" WHERE "+RESTAURANT_NAME+" LIKE '%"+searchString+"%'";
+
+        Cursor cursor = db.rawQuery(query,null);
+
+        if(cursor.moveToFirst()){
+
+            do{
+                Restaurant restaurant = new Restaurant(cursor.getString(0),cursor.getString(1),cursor.getString(2));
+                restaurants.add(restaurant);
+            }while (cursor.moveToNext());
+
+        }
+
+        return restaurants;
+    }
+
+
+    public ArrayList<Dish> getTop10Dishes(){
+
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<Dish>dishes = new ArrayList<>();
+
+        String query = "SELECT * FROM "+TABLE_DISH+" ORDER BY "+DISH_RATING+" DESC LIMIT 10";
+        Cursor cursor = db.rawQuery(query,null);
+
+        if(cursor.moveToFirst()){
+
+            do{
+                Dish dish = new Dish(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        Integer.parseInt(cursor.getString(3)),
+                        Integer.parseInt(cursor.getString(4)),
+                        Integer.parseInt(cursor.getString(5)),
+                        convertStringToArray(cursor.getString(6)));
+
+                dishes.add(dish);
+            }while (cursor.moveToNext());
+
+        }
+
+        return dishes;
+
+    }
+
 
 
     public static String strSeparator = "__,__";

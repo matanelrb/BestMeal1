@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ public class Login extends AppCompatActivity {
         et1 = (EditText)findViewById(R.id.et1);
         et2 = (EditText)findViewById(R.id.et2);
         DBHandler db = new DBHandler(this);
+
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEDB64D")));
         getSupportActionBar().setTitle("Login");
@@ -62,7 +64,20 @@ public class Login extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        int id = item.getItemId();
+
+        if(id == R.id.btn1){
+
+            Intent intent = new Intent(this,Register.class);
+            startActivity(intent);
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public void register(View view) {
 

@@ -12,6 +12,7 @@
     <include
         layout="@layout/app_bar_main__page"
         android:layout_width="match_parent"
+        android:background = "#FFF2E4CA"
         android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView

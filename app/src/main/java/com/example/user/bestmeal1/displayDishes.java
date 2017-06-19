@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,12 +21,13 @@ public class displayDishes extends AppCompatActivity {
         setContentView(R.layout.activity_display_dishes);
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEDB64D")));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DBHandler db = new DBHandler(this);
 
         Intent intent = getIntent();
 
-        ArrayList<Dish>dishes = db.getDishByRestaurant(intent.getStringExtra("RESTAURANT_NAME"));
+        ArrayList<Dish>dishes = db.getDishesByRestaurant(intent.getStringExtra("RESTAURANT_NAME"));
 
         dishAdapter adapter = new dishAdapter(this,dishes);
 
@@ -37,5 +39,18 @@ public class displayDishes extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        int id = item.getItemId();
+
+        if(id == R.id.home){
+
+            Intent intent = new Intent(this,Main_Page.class);
+            startActivity(intent);
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
