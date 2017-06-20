@@ -21,7 +21,6 @@ public class displayDishes extends AppCompatActivity {
         setContentView(R.layout.activity_display_dishes);
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEDB64D")));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DBHandler db = new DBHandler(this);
 
@@ -39,18 +38,4 @@ public class displayDishes extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if(id == R.id.home){
-
-            Intent intent = new Intent(this,Main_Page.class);
-            startActivity(intent);
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

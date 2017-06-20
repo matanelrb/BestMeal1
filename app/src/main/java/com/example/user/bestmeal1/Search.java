@@ -31,7 +31,7 @@ public class Search extends AppCompatActivity {
         lv1 = (ListView)findViewById(R.id.lv1);
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEDB64D")));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void Search(View view) {
@@ -46,17 +46,4 @@ public class Search extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if(id == R.id.home){
-
-            Intent intent = new Intent(this,Main_Page.class);
-            startActivity(intent);
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

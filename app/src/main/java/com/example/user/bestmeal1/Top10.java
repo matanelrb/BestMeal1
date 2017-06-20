@@ -1,9 +1,13 @@
 package com.example.user.bestmeal1;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +26,7 @@ public class Top10 extends AppCompatActivity {
         DBHandler db = new DBHandler(this);
         lv1 = (ListView)findViewById(R.id.lv1);
 
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEDB64D")));
 
 
         Bundle extras = getIntent().getExtras();
@@ -42,4 +47,6 @@ public class Top10 extends AppCompatActivity {
         }
 
     }
+
+
 }

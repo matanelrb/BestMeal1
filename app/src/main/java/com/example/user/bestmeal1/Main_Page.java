@@ -135,12 +135,20 @@ public class Main_Page extends AppCompatActivity
 
             Intent intent = new Intent(this,Top10.class);
             intent.putExtra("TOP10","restaurants");
+            Bundle extras = getIntent().getExtras();
+            intent.putExtra("LOGGED_IN_NAME",extras.getString("LOGGED_IN_NAME"));
+            intent.putExtra("LOGGED_IN_EMAIL",extras.getString("LOGGED_IN_EMAIL"));
+
             startActivity(intent);
 
         } else if (id == R.id.nav_top_ten_dishes) {
 
             Intent intent = new Intent(this,Top10.class);
             intent.putExtra("TOP10","dishes");
+            Bundle extras = getIntent().getExtras();
+            intent.putExtra("LOGGED_IN_NAME",extras.getString("LOGGED_IN_NAME"));
+            intent.putExtra("LOGGED_IN_EMAIL",extras.getString("LOGGED_IN_EMAIL"));
+
             startActivity(intent);
 
         }
