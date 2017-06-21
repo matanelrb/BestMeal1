@@ -27,7 +27,8 @@ public class Top10 extends AppCompatActivity {
         lv1 = (ListView)findViewById(R.id.lv1);
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEDB64D")));
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle("Top 10 Dishes");
 
         Bundle extras = getIntent().getExtras();
 

@@ -49,11 +49,13 @@ public class restaurantAdapter extends ArrayAdapter<Restaurant> {
 
         TextView tvName = (TextView)convertView.findViewById(R.id.r_name);
         TextView tvPhoneNumber = (TextView)convertView.findViewById(R.id.number);
+        TextView tvAddress = (TextView)convertView.findViewById(R.id.tvAddress);
 
         tvName.setText(restaurant.getR_name());
-        tvPhoneNumber.setText(restaurant.getR_phone_number());
+        tvPhoneNumber.setText("Phone number: "+restaurant.getR_phone_number());
+        tvAddress.setText("Address: "+restaurant.getR_address());
 
-        Button btn1 = (Button)convertView.findViewById(R.id.btn1);
+
         Button btnMenu = (Button)convertView.findViewById(R.id.btnMenu);
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
@@ -68,13 +70,7 @@ public class restaurantAdapter extends ArrayAdapter<Restaurant> {
         });
 
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-
-            }
-        });
 
 
 

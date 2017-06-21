@@ -47,16 +47,12 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String NO_OF_DISH_RATINGS = "number_of_ratings";
     public static final String CUSTOMERS_THAT_RATED = "customer_that_rated";
 
-    //ORDER
-  /*  public static final String TABLE_ORDER = "orders";
 
-    public static final String ORDER_ID = "id";
-*/
 
     public static final String[] CUSTOMER_COLUMNS = {KEY_EMAIL, KEY_PASSWORD, FIRST_NAME, LAST_NAME, C_PHONE_NUMBER};
     public static final String[] RESTAURANT_COLUMNS = {RESTAURANT_NAME, RESTAURANT_ADDRESS, R_PHONE_NUMBER};
     public static final String[] DISH_COLUMNS = {DISH_NAME,"restaurant_name", DISH_TYPE, DISH_PRICE, DISH_RATING, NO_OF_DISH_RATINGS,CUSTOMERS_THAT_RATED};
-//    public static final String[] ORDER_COLUMNS = {ORDER_ID, KEY_EMAIL, RESTAURANT_NAME, DISH_NAME};
+
 
 
     public DBHandler(Context context) {
@@ -70,12 +66,11 @@ public class DBHandler extends SQLiteOpenHelper {
         String Create_T_Customer = "CREATE TABLE " + TABLE_CUSTOMER + "(" + KEY_EMAIL + " TEXT PRIMARY KEY," + KEY_PASSWORD + " TEXT," + FIRST_NAME + " TEXT," + LAST_NAME + " TEXT," + C_PHONE_NUMBER + " TEXT);";
         String Create_T_Restaurant = "CREATE TABLE " + TABLE_RESTAURANT + "(" + RESTAURANT_NAME + " TEXT PRIMARY KEY," + RESTAURANT_ADDRESS + " TEXT," + R_PHONE_NUMBER + " TEXT);";
         String Create_T_Dish = "CREATE TABLE " + TABLE_DISH + "(" + DISH_NAME + " TEXT,"+"restaurant_name"+" TEXT," + DISH_TYPE + " TEXT," + DISH_PRICE + " TEXT," + DISH_RATING + " TEXT," + NO_OF_DISH_RATINGS + " TEXT,"+CUSTOMERS_THAT_RATED+" TEXT,PRIMARY KEY("+DISH_NAME+","+"restaurant_name"+"));";
-       // String Create_T_Order = "CREATE TABLE " + TABLE_ORDER + "(" + ORDER_ID + " INTEGER," + KEY_EMAIL + " TEXT," + "restaurant_name" + " TEXT," + DISH_NAME + " TEXT,PRIMARY KEY("+ORDER_ID+","+KEY_EMAIL+","+"restaurant_name"+","+DISH_NAME+"));";
 
         db.execSQL(Create_T_Customer);
         db.execSQL(Create_T_Restaurant);
         db.execSQL(Create_T_Dish);
-      //  db.execSQL(Create_T_Order);
+
 
     }
 
@@ -84,13 +79,12 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CUSTOMER);
         onCreate(db);
+
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESTAURANT);
         onCreate(db);
+
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_DISH);
         onCreate(db);
-      //  db.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDER);
-       // onCreate(db);
-
 
     }
 
@@ -144,20 +138,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-  /*  public void addOrder(Order order) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_EMAIL, order.getEmail());
-        values.put(RESTAURANT_NAME, order.getRestaurantName());
-        values.put(DISH_NAME, order.getDishName());
-
-        db.insert(TABLE_ORDER, null, values);
-
-        db.close();
-
-    }*/
 
     public Customer getCustomer(String email) {
 
@@ -227,28 +207,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return dish;
     }
 
-  /*  public Order getOrder(String orderID) {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_ORDER, ORDER_COLUMNS, ORDER_ID + " = ?", new String[]{orderID}, null, null, null, null);
-
-        if (cursor != null) {
-
-            cursor.moveToFirst();
-
-        }
-
-        Order order = new Order(
-                Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getString(3));
-
-        return order;
-
-    }
-*/
+  // Returning a List containing all Customers emails
     public List<String> getAllEmails() {
 
         List<String> emails = new LinkedList<String>();
@@ -273,6 +232,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    // Returning if the email exists in the database
     public boolean checkEmail(String email){
 
         String[]emails = new String[getAllEmails().size()];
@@ -282,6 +242,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    // Returning if the login credentials are correct
     public boolean checkLogin(String username, String password){
 
         List<String>emails = getAllEmails();
@@ -295,6 +256,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    // Returning a List containing all restaurants in the database
     public ArrayList<Restaurant> getAllRestaurants(){
 
         ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
@@ -316,6 +278,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return restaurants;
     }
 
+    // Returning a List of all dishes that a restaurant contains(returning the menu of the restaurant)
     public ArrayList<Dish> getDishesByRestaurant(String rName){
 
         ArrayList<Dish>dishes = new ArrayList<Dish>();
@@ -342,6 +305,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    // Rating a dish
     public void rateDish(Dish dish,int rating,String loggedInName){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -362,6 +326,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    // Searching for restaurants matching a keyword that the user putted
     public ArrayList<Restaurant> findRestaurants(String searchString){
 
         ArrayList<Restaurant>restaurants = new ArrayList<>();
@@ -382,7 +347,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return restaurants;
     }
 
-
+    //Returning a List with the 10 dishes with the highest rating
     public ArrayList<Dish> getTop10Dishes(){
 
         SQLiteDatabase db = getReadableDatabase();
@@ -412,9 +377,39 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    public ArrayList<Dish> get10CheapestDishes(){
+
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<Dish>dishes = new ArrayList<>();
+
+        String query = "SELECT * FROM "+TABLE_DISH+" WHERE "+DISH_TYPE+"=? ORDER BY "+DISH_PRICE+" ASC LIMIT 10";
+        Cursor cursor = db.rawQuery(query,new String[]{"Food"});
+
+        if(cursor.moveToFirst()){
+
+            do{
+                Dish dish = new Dish(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        Integer.parseInt(cursor.getString(3)),
+                        Integer.parseInt(cursor.getString(4)),
+                        Integer.parseInt(cursor.getString(5)),
+                        convertStringToArray(cursor.getString(6)));
+
+                dishes.add(dish);
+            }while (cursor.moveToNext());
+
+        }
+
+        return dishes;
+
+    }
+
 
 
     public static String strSeparator = "__,__";
+    // Converting an array of strings to a string with seperators
     public static String convertArrayToString(String[] array){
         String str = "";
         for (int i = 0;i<array.length; i++) {
@@ -426,6 +421,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return str;
     }
+    // Converting a string with seperators to an array of strings
     public static String[] convertStringToArray(String str){
         String[] arr = str.split(strSeparator);
         return arr;

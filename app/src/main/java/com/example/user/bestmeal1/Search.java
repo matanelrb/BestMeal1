@@ -31,6 +31,8 @@ public class Search extends AppCompatActivity {
         lv1 = (ListView)findViewById(R.id.lv1);
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEDB64D")));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle("Find a Restaurant");
 
     }
 

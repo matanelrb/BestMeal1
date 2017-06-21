@@ -6,14 +6,15 @@
             android:id="@+id/nav_find_a_restaurant"
             android:icon="@drawable/ic_menu_search"
             android:title="Find a Restaurant" />
-        <item
-            android:id="@+id/nav_top_ten_restaurants"
-            android:icon="@drawable/ic_menu_top"
-            android:title="Top 10 Restaurants" />
+
         <item
             android:id="@+id/nav_top_ten_dishes"
             android:icon="@drawable/ic_menu_top"
             android:title="Top 10 Dishes" />
+        <item
+            android:id="@+id/nav_cheap_dishes"
+            android:icon = "@drawable/ic_money"
+            android:title="Cheapest Food Dishes" />
 
     </group>
 

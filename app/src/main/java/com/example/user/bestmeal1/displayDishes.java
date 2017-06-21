@@ -21,12 +21,15 @@ public class displayDishes extends AppCompatActivity {
         setContentView(R.layout.activity_display_dishes);
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEDB64D")));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
 
         DBHandler db = new DBHandler(this);
 
         Intent intent = getIntent();
 
         ArrayList<Dish>dishes = db.getDishesByRestaurant(intent.getStringExtra("RESTAURANT_NAME"));
+        getSupportActionBar().setTitle(intent.getStringExtra("RESTAURANT_NAME")+"'s Menu");
 
         dishAdapter adapter = new dishAdapter(this,dishes);
 

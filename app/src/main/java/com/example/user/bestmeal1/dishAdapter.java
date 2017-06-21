@@ -54,11 +54,11 @@ public class dishAdapter extends ArrayAdapter<Dish> {
         TextView tvRating = (TextView)convertView.findViewById(R.id.tvrating);
         TextView tvNoOfRatings = (TextView)convertView.findViewById(R.id.tvNoOfRatings);
 
-        tvName.setText(dish.getDish_name());
-        tvPrice.setText(String.valueOf(dish.getDish_price()));
+        tvName.setText(String.valueOf(position+1)+"."+dish.getDish_name());
+        tvPrice.setText("Price:"+String.valueOf(dish.getDish_price())+"₪");
         tvType.setText(dish.getDish_type());
-        tvRating.setText(String.valueOf(dish.getDish_rating()));
-        tvNoOfRatings.setText(String.valueOf(dish.getNo_o_dish_ratings()));
+        tvRating.setText("Rating:"+String.valueOf(dish.getDish_rating()));
+        tvNoOfRatings.setText("Number of Ratings:"+String.valueOf(dish.getNo_o_dish_ratings()));
 
         Button btnRating = (Button)convertView.findViewById(R.id.btnRating);
         final EditText etRating = (EditText)convertView.findViewById(R.id.etRating);

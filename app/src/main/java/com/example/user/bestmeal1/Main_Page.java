@@ -59,13 +59,7 @@ public class Main_Page extends AppCompatActivity
         listView.addHeaderView(view);
         tv1 = (TextView)view.findViewById(R.id.tv1);
 
-        if(savedInstanceState == null){
 
-            Bundle extras = getIntent().getExtras();
-            tv1.setText("Hello "+extras.getString("LOGGED_IN_NAME")+" and welcome to BestMeal");
-            adapter.setLoggedInName(extras.getString("LOGGED_IN_EMAIL"));
-
-        }
 
 
 
@@ -74,6 +68,15 @@ public class Main_Page extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         toolbar.setBackgroundColor(Color.parseColor("#FFEDB64D"));
+        if(savedInstanceState == null){
+
+            Bundle extras = getIntent().getExtras();
+            tv1.setText("A list of all restaurants that we have in our database:");
+            adapter.setLoggedInName(extras.getString("LOGGED_IN_EMAIL"));
+            toolbar.setSubtitle("Welcome "+extras.getString("LOGGED_IN_NAME").substring(0, 1).toUpperCase() + extras.getString("LOGGED_IN_NAME").substring(1));
+
+        }
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -131,17 +134,7 @@ public class Main_Page extends AppCompatActivity
             Intent intent = new Intent(this,Search.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_top_ten_restaurants) {
-
-            Intent intent = new Intent(this,Top10.class);
-            intent.putExtra("TOP10","restaurants");
-            Bundle extras = getIntent().getExtras();
-            intent.putExtra("LOGGED_IN_NAME",extras.getString("LOGGED_IN_NAME"));
-            intent.putExtra("LOGGED_IN_EMAIL",extras.getString("LOGGED_IN_EMAIL"));
-
-            startActivity(intent);
-
-        } else if (id == R.id.nav_top_ten_dishes) {
+        }  else if (id == R.id.nav_top_ten_dishes) {
 
             Intent intent = new Intent(this,Top10.class);
             intent.putExtra("TOP10","dishes");
@@ -149,6 +142,11 @@ public class Main_Page extends AppCompatActivity
             intent.putExtra("LOGGED_IN_NAME",extras.getString("LOGGED_IN_NAME"));
             intent.putExtra("LOGGED_IN_EMAIL",extras.getString("LOGGED_IN_EMAIL"));
 
+            startActivity(intent);
+
+        }else if(id == R.id.nav_cheap_dishes){
+
+            Intent intent = new Intent(this,cheapestDishes.class);
             startActivity(intent);
 
         }
